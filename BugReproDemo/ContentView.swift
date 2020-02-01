@@ -37,10 +37,17 @@ struct ContentView: View {
                 print("Error fetching documents: \(err!)")
                 return
             }
-            
-            // The following line causes the "canvas" in Xcode to crash.
+
+            // example map over an array with a plain Swift type in it
+            // it works!
+            let fakeCoffees: [String] = ["Frappuccino", "Tea"]
+            self.coffees = fakeCoffees.map { name in
+              Coffee(id: name, name: name, grown: Date())
+            }
+
+            // The following line causes the "canvas" in Xcode to crash. As soon as we iterate over 'documents'
             // https://github.com/firebase/firebase-ios-sdk/issues/4772
-            self.coffees = documents.map { Coffee(document: $0) }
+            //self.coffees = documents.map { Coffee(document: $0) }
         }
     }
 }
